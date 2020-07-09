@@ -1,5 +1,7 @@
 # stm32IAPDemo
 
+stm32f103 + freeRTOS + uart command + IAP
+
 This IAP demo put bootloader and application into one project.
 
 ## 1.How to build bootloader
