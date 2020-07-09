@@ -50,3 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/.vs
+/embedded/MDK-ARM/stm32IAPDemo.uvguix.gaoyi
+/embedded/MDK-ARM/RTE/_stm32IAPDemo
+/embedded/MDK-ARM/stm32IAPDemo
+/pc/.vs/stm32IAPDemo
+/pc/stm32IAPDemo/bin/Debug/netcoreapp3.1
+/pc/stm32IAPDemo/obj
+/pc/packages/CommandLineParser.2.8.0
+
+!/test/stm32IAPDemo.exe
+!/test/CommandLine.dll
