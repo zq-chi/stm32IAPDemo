@@ -17,7 +17,7 @@ uncomment '#define BOOTLOADER_APPLICATION' on main.h
 This will enable ```CheckUpdate``` Function on startup located at main.c
 
  ```C
-
+/* USER CODE BEGIN 2 */
 #ifdef BOOTLOADER_APPLICATION
 CheckUpdate();
 #endif
