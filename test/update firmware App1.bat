@@ -1,0 +1,1 @@
+stm32IAPDemo.exe -c COM2 -u APP1.bin
