@@ -92,9 +92,8 @@ press any key to exit...
 
 ```BASH
 D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -i
-D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -i
 get info
-msg from application1
+msg from application2
 press any key to exit...
 ```
 
