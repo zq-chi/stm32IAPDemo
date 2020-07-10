@@ -27,6 +27,10 @@ LL_USART_EnableIT_RXNE(USART1);
 /* USER CODE END 2 */
 
  ```
+ 
+ Set bootloader rom address
+ 
+![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
 
 ## 2.How to build application
 
@@ -50,9 +54,15 @@ This will disable ```CheckUpdate``` Function on startup located at main.c, and s
 /* USER CODE END 1 */
 ```
 
+ Set application rom address
+ 
+![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
+
 ## 3.Test
 
-### 1.First, we build the bootloader and download it to the flash, we use the get info command to see what msg income
+### 1.First
+
+we build the bootloader and download it to the flash, we use the get info command to see what msg income
 
 ```BASH
 D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -i
@@ -61,7 +71,9 @@ msg from bootloader
 press any key to exit...
 ```
 
-### 2.Second, we use the update command to download the firmware APP1.bin to the flash
+### 2.Second
+
+we use the update command to download the firmware APP1.bin to the flash
 
 ```BASH
 D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -u APP1.bin
@@ -79,7 +91,9 @@ msg from application1
 press any key to exit...
 ```
 
-### 3.Third, we use the update command to download the firmware APP2.bin to the flash
+### 3.Third
+
+we use the update command to download the firmware APP2.bin to the flash
 
 ```BASH
 D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -u APP2.bin
