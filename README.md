@@ -82,6 +82,8 @@ This will disable ```CheckUpdate``` Function on startup located at main.c, and s
 
 ## 3.Test
 
+We build a tool to simply our test, this tool was wrriten on C# language
+
 ### 1.First
 
 we build the bootloader and download it to the flash, we use the get info command to see what msg income
