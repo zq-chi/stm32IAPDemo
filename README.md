@@ -4,6 +4,28 @@ stm32f103 + freeRTOS + uart command + IAP
 
 This IAP demo put bootloader and application into one project.
 
+## Flash Distribution
+
+| Description   | Start Address| Size         |
+| :-------------| :----------: | -----------: |
+| Bootloader    | 0x08000000   | 0x14000      |
+| Applicaton    | 0x08014000   | 0x14000      |
+| Update Package| 0x08028000   | 0x14000      |
+| Update Info   | 0x0803C000   | 0x800        |
+
+## Boot Sequence
+
+1. System start from address 0x08000000 to load bootloader
+2. Bootloader load info from 'Update Info' region to check whether there was an update exist
+3. If there was an updata package and package size is less then max package size and the CRC is correct, bootloader move the 'Update Package' region content to the 'Application' region and clear the Update Flag
+4. Check the 'Application' region CRC, if CRC is correct, jump to the Application address and run, else stay on bootloader, the bootloader serves as an factory version
+
+## Update Sequence
+
+1. Host send a 'Init Update' command to device to notify the device prepare for update
+2. Host send update content to device by packages. The first package's first 64 bytes contains the totoal firmware bytes count, CRC, and other validate information, we use this info to check whether the updata file matchs this device, and whether the totoal firmware is correctly received. When a FLASH_PAGE_SIZE firmware received, we write the content to the 'Update Package' region
+3. If all the firmware was received and the CRC is correct, we set a Update flag to the 'Update Info' region, and restart this device to load bootloader and update firmware
+
 ## 1.How to build bootloader
 
 uncomment '#define BOOTLOADER_APPLICATION' on main.h
@@ -27,9 +49,9 @@ LL_USART_EnableIT_RXNE(USART1);
 /* USER CODE END 2 */
 
  ```
- 
+
  Set bootloader rom address to 0x8000000
- 
+
 ![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
 
 ## 2.How to build application
@@ -55,7 +77,7 @@ This will disable ```CheckUpdate``` Function on startup located at main.c, and s
 ```
 
  Set application rom address to 0x8014000
- 
+
 ![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
 
 ## 3.Test
