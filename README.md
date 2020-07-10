@@ -82,7 +82,7 @@ This will disable ```CheckUpdate``` Function on startup located at main.c, and s
 
 ## 3.Test
 
-We build a tool to simply our test, this tool was wrriten on C# language
+We build a tool to simply our test, this tool was written on C# language
 
 ### 1.First
 
