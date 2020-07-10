@@ -28,7 +28,7 @@ LL_USART_EnableIT_RXNE(USART1);
 
  ```
  
- Set bootloader rom address
+ Set bootloader rom address to 0x8000000
  
 ![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
 
@@ -54,7 +54,7 @@ This will disable ```CheckUpdate``` Function on startup located at main.c, and s
 /* USER CODE END 1 */
 ```
 
- Set application rom address
+ Set application rom address to 0x8014000
  
 ![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
 
