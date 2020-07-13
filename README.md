@@ -24,7 +24,7 @@ This IAP demo put bootloader and application into one project.
 
 1. Host send a 'Init Update' command to device to notify the device prepare for update
 2. Host send update content to device by packages. The first package's first 64 bytes contains the totoal firmware bytes count, CRC, and other validate information, we use this info to check whether the updata file matchs this device, and whether the totoal firmware is correctly received. When a FLASH_PAGE_SIZE firmware received, we write the content to the 'Update Package' region
-3. If all the firmware was received and the CRC is correct, we set a Update flag to the 'Update Info' region, and restart this device to load bootloader and update firmware
+3. If all the firmware was received and the CRC is correct, we set a Update flag to the 'Update Info' region, and reset this device to load bootloader and update firmware
 
 ## 1.How to build bootloader
 
@@ -49,6 +49,22 @@ LL_USART_EnableIT_RXNE(USART1);
 /* USER CODE END 2 */
 
  ```
+
+and return 'msg from bootloader' string if get info command received
+
+```C
+void process_get_info(void)
+{
+ #ifdef BOOTLOADER_APPLICATION
+ uint8_t msg[] = "msg from bootloader";
+ SendCmdOkWithDataRespose(msg,sizeof(msg)/sizeof(char));
+ #else
+ uint8_t msg[] = "msg from application1"; // APP1 msg
+ //uint8_t msg[] = "msg from application2"; // APP2 msg
+ SendCmdOkWithDataRespose(msg,sizeof(msg)/sizeof(char));
+ #endif
+}
+```
 
  Set bootloader rom address to 0x8000000
 
@@ -76,13 +92,31 @@ This will disable ```CheckUpdate``` Function on startup located at main.c, and s
 /* USER CODE END 1 */
 ```
 
+and return 'msg from application1'(APP1) or 'msg from application2'(APP2)  string if get info command received
+
+```C
+void process_get_info(void)
+{
+ #ifdef BOOTLOADER_APPLICATION
+ uint8_t msg[] = "msg from bootloader";
+ SendCmdOkWithDataRespose(msg,sizeof(msg)/sizeof(char));
+ #else
+ uint8_t msg[] = "msg from application1"; // APP1 msg
+ //uint8_t msg[] = "msg from application2"; // APP2 msg
+ SendCmdOkWithDataRespose(msg,sizeof(msg)/sizeof(char));
+ #endif
+}
+```
+
  Set application rom address to 0x8014000
 
 ![alt text](https://github.com/zachary-chi/stm32IAPDemo/blob/master/test/set%20bootloader%20rom%20address.png?raw=true)
 
 ## 3.Test
 
-We build a tool to simply our test, this tool was written on C# language
+Before our test, we need to convert '.axf' to '.bin' file using tool 'fromelf.exe'. We can put this custom command line 'C:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin -o ./BIN/stm32IAPDemo.bin ./stm32IAPDemo/stm32IAPDemo.axf' into option User Tab's 'After Built/Rebuild' column to auto generate '.bin' file. The 'fromelf.exe' tool's location depends on your Keil installation directory. For details refer to <http://www.keil.com/support/man/docs/armutil/>.
+
+We build a tool to simply our test, this tool was written on C# language.
 
 ### 1.First
 
