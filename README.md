@@ -116,7 +116,7 @@ void process_get_info(void)
 
 Before our test, we need to convert '.axf' to '.bin' file using tool 'fromelf.exe'. We can put this custom command line 'C:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin -o ./BIN/stm32IAPDemo.bin ./stm32IAPDemo/stm32IAPDemo.axf' into option User Tab's 'After Built/Rebuild' column to auto generate '.bin' file. The 'fromelf.exe' tool's location depends on your Keil installation directory. For more details refer to <http://www.keil.com/support/man/docs/armutil/>.
 
-We build a tool to simply our test, this tool was written on C# language.
+We build a tool to simply our test, this tool was written on C# language. You need to set the COM address based on your reality.
 
 ### 1.First
 
