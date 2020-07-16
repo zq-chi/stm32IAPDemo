@@ -139,6 +139,12 @@ namespace stm32IAPDemo
             return Encoding.ASCII.GetString(receiveData);
         }
 
+        public uint GetTemperatureADC()
+        {
+            byte[] receiveData = SendAndGetFrame(0x0007);
+            return BitConverter.ToUInt32(receiveData.Reverse().ToArray(), 0);
+        }
+
         public void UpdateFirmware(string updatefile)
         {
             SendAndGetFrame(0x0004, new byte[] { 0x01 });

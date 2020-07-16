@@ -19,5 +19,8 @@ namespace stm32IAPDemo
 
         [Option('u', "update", Required = false, HelpText = "update firmware")]
         public string file { get; set; }
+
+        [Option('t', "test", Required = false, HelpText = "test")]
+        public bool test { get; set; }
     }
 }

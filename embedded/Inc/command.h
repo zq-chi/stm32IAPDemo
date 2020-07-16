@@ -36,7 +36,7 @@ void CheckUpdate(void);
 extern osMessageQueueId_t cmdRxQueueHandle;
 extern osMessageQueueId_t cmdTxQueueHandle;
 extern osTimerId_t cmdReceiveTimeoutHandle;
-
+extern uint32_t temperature_adc;
 
 #ifdef __cplusplus
 }

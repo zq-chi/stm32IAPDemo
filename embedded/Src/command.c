@@ -21,6 +21,7 @@
 #define  INIT_UPDATA_FIRMWARE        0X04
 #define  GET_UPDATA_DATA             0x05
 #define  RUN_FIRMWARE                0X06
+#define  GET_TEMPERATURE_ADC         0X07
 
 #define CMD_BUFF_SIZE               (256+64) // depend on max cmd size
 	 
@@ -79,6 +80,7 @@ void process_set_time(void);
 void process_init_update_firmware(void);
 void process_get_update_data(void);
 void process_run_firmware(void);
+void process_get_temperature_adc(void);
 void process_get_info(void);
 void JumpToApp(void);
 uint8_t CalculateFlashFirmwareChecksum(uint32_t addr);
@@ -88,6 +90,7 @@ CommandStuct cmd;
 FirmwareUpdateStuct firmwareUpdate;
 pFunction JumpToApplication;
 uint32_t JumpAddress;
+uint32_t temperature_adc;
 
 /* user code ---------------------------------------------------------*/
 void process_command_id(void)
@@ -111,6 +114,9 @@ void process_command_id(void)
 			break;
 		case GET_Info:
 			process_get_info();
+			break;
+		case GET_TEMPERATURE_ADC:
+			process_get_temperature_adc();
 			break;
 		default:
 			// unknown command
@@ -333,6 +339,16 @@ void process_run_firmware(void)
 	{
 		SendCmdParamErrorRespose();
 	}
+}
+
+void process_get_temperature_adc(void)
+{
+	uint8_t buff[4] = {0};
+	buff[0] = (temperature_adc >> 24) & 0xFF;
+	buff[1] = (temperature_adc >> 16) & 0xFF;
+	buff[2] = (temperature_adc >> 8) & 0xFF;
+	buff[3] = temperature_adc & 0xFF;
+	SendCmdOkWithDataRespose(buff,4);
 }
 
 void process_get_info(void)

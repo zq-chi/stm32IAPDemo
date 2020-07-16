@@ -123,7 +123,7 @@ We build a tool to simply our test, this tool was written on C# language. You ne
 we build the bootloader and download it to the flash, we use the get info command to see what msg income
 
 ```BASH
-D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -i
+D:\stm32IAPDemo\test>..\pc\stm32IAPDemo\bin\Debug\stm32IAPDemo.exe -c COM2 -i
 get info
 msg from bootloader
 press any key to exit...
@@ -134,7 +134,7 @@ press any key to exit...
 we use the update command to download the firmware APP1.bin to the flash
 
 ```BASH
-D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -u APP1.bin
+D:\stm32IAPDemo\test>..\pc\stm32IAPDemo\bin\Debug\stm32IAPDemo.exe -c COM2 -u APP1.bin
 update firmware...
 update firmware done
 press any key to exit...
@@ -143,7 +143,7 @@ press any key to exit...
  and excute the get info command again
 
 ```BASH
-D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -i
+D:\stm32IAPDemo\test>..\pc\stm32IAPDemo\bin\Debug\stm32IAPDemo.exe -c COM2 -i
 get info
 msg from application1
 press any key to exit...
@@ -154,7 +154,7 @@ press any key to exit...
 we use the update command to download the firmware APP2.bin to the flash
 
 ```BASH
-D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -u APP2.bin
+D:\stm32IAPDemo\test>..\pc\stm32IAPDemo\bin\Debug\stm32IAPDemo.exe -c COM2 -u APP2.bin
 update firmware...
 update firmware done
 press any key to exit...
@@ -163,10 +163,11 @@ press any key to exit...
  and excute the get info command again
 
 ```BASH
-D:\stm32IAPDemo\test>stm32IAPDemo.exe -c COM2 -i
+D:\stm32IAPDemo\test>..\pc\stm32IAPDemo\bin\Debug\stm32IAPDemo.exe -c COM2 -i
 get info
 msg from application2
 press any key to exit...
+
 ```
 
 Enjoy!

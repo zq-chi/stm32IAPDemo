@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace stm32IAPDemo
 {
@@ -25,6 +26,21 @@ namespace stm32IAPDemo
         static void RunOptions(Options opts)
         {
             var cmd = new Command(opts.comPort, 115200);
+            if (opts.test)
+            {
+                Console.WriteLine("get info");
+                Console.WriteLine(cmd.GetInfo());
+                Console.WriteLine("set time to now");
+                cmd.SetTimeToNow();
+                Console.WriteLine("read time");
+                for (int i = 0; i < 3; i++)
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    Console.WriteLine(cmd.ReadTime());
+                }
+                Console.WriteLine("get temperature adc");
+                Console.WriteLine(cmd.GetTemperatureADC());
+            }
             if (opts.getInfo)
             {
                 Console.WriteLine("get info");

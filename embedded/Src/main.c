@@ -21,6 +21,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "adc.h"
+#include "dma.h"
 #include "iwdg.h"
 #include "rtc.h"
 #include "usart.h"
@@ -97,10 +99,16 @@ int main(void)
   MX_USART1_UART_Init();
   MX_RTC_Init();
   MX_IWDG_Init();
+  MX_DMA_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 	#ifdef BOOTLOADER_APPLICATION	
 	CheckUpdate();
 	#endif	
+	// https://controllerstech.com/how-to-read-multichannel-adc-in-stm32/
+	// https://controllerstech.com/stm32-adc-multi-channels/
+	HAL_ADCEx_Calibration_Start(&hadc1); // we need to start the calibration before the adc start
+	HAL_ADC_Start_DMA (&hadc1, &temperature_adc, 1);
 	LL_USART_EnableIT_RXNE(USART1);
   /* USER CODE END 2 */
 
@@ -160,8 +168,9 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_ADC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
